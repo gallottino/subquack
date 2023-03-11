@@ -1,12 +1,12 @@
-import { Query } from "./utilities/query";
-import { Field } from "./utilities/field";
-
 import { readFileSync } from "fs";
-import { buildQuery } from "./utilities/query_builder";
+import { buildQueryGraph } from "./utilities/query_builder";
+import { QueryNode } from "./utilities/query_node";
 
 const file = readFileSync("./queries/component.ql", "utf-8");
 
 const query_str = file.replace(/(\r\n|\n|\r)/gm, "").replace(/\s/g, "");
 
-const query = buildQuery(query_str.split("{"));
-query?.execute();
+var query = new QueryNode("");
+buildQueryGraph(query_str, 0, query);
+var res = query.execute();
+console.log(JSON.stringify(res, null, 4));
