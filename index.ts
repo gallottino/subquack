@@ -2,7 +2,7 @@ import { readFileSync } from "fs";
 import { buildQueryGraph } from "./utilities/query_builder";
 import { QueryNode } from "./utilities/query_node";
 
-const file = readFileSync("./queries/component.ql", "utf-8");
+const file = readFileSync(process.argv[2], "utf-8");
 
 const query_str = file.replace(/(\r\n|\n|\r)/gm, "").replace(/\s/g, "");
 
